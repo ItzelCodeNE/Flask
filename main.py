@@ -31,11 +31,16 @@ def addDB():
     password = request.form['Password']
 
     rem = DB.AddUser(sqlite3.connect('IRSV2.db'),username,password)
-    return rem
+    return user()
 
 @IRSV2.route("/removeDB", methods=['GET', 'POST'])
 def removeDB():
-    pass
+    
+    id = request.form['id']
+
+    rem = DB.RemoveUser(sqlite3.connect('IRSV2.db'),id)
+
+    return user()
 
 
 

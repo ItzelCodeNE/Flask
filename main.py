@@ -14,10 +14,15 @@ def root():
 def home():
     return render_template('home.html',NameDisplay=inspect.currentframe().f_code.co_name)
 
-@IRSV2.route("/user", methods=['GET', 'POST'])
-def user():
+@IRSV2.route("/login", methods=['GET', 'POST'])
+def login():
         
-    return render_template('user.html',NameDisplay=inspect.currentframe().f_code.co_name)
+    return render_template('login.html',NameDisplay=inspect.currentframe().f_code.co_name)
+
+@IRSV2.route("/register", methods=['GET', 'POST'])
+def register():
+        
+    return render_template('register.html',NameDisplay=inspect.currentframe().f_code.co_name)
 
 @IRSV2.route("/returnDB", methods=['GET', 'POST'])
 def returnDB():
@@ -31,7 +36,7 @@ def addDB():
     password = request.form['Password']
 
     rem = DB.AddUser(sqlite3.connect('IRSV2.db'),username,password)
-    return user()
+    return home()
 
 @IRSV2.route("/removeDB", methods=['GET', 'POST'])
 def removeDB():
@@ -40,7 +45,7 @@ def removeDB():
 
     rem = DB.RemoveUser(sqlite3.connect('IRSV2.db'),id)
 
-    return user()
+    return home()
 
 
 

@@ -8,7 +8,7 @@
             align-items: center;
             height: 100vh;
         }
-        .options {
+        .inputs {
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -17,11 +17,12 @@
 </head>
 <body>
     <div class="center-div">
-        <div class="options">
-            <button><a href="/login">Login</a></button>
-            <button><a href="/register">Register</a></button>
-            <button><a href="/user">Profile</a></button>
-            <button>Logout</button>
+        <div class="inputs">
+            <form action="/addDB" method="POST">
+                <input type="text" placeholder="username" name="Username">
+                <input type="text" placeholder="Password" name="Password">
+                <input type="submit" value="Register" name="Send">
+            </form>
         </div>
     </div>
 </body>

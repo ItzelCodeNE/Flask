@@ -26,6 +26,32 @@ class connectionDb:
         Remove.execute(SQL.format(ID))
         connection.commit()
 
+    def Login(connection,Username,password):
+        ver = connection.cursor()
+        SQL = ''' SELECT * FROM Users WHERE Username = '{0}' '''
+        ver.execute(SQL.format(Username))
+        Table = ver.fetchall()
+        print(Table)
+
+        if password == Table[0][2]:
+            print('Login granted')
+        else:
+            print('Wrong password')
+
+    def FindUser(connection,Username):
+        find = connection.cursor()
+        SQL = '''SELECT * FROM Users'''
+        find.execute(SQL)
+        UsersTable = find.fetchall()
+        for i in range(len(UsersTable)):
+            if Username == UsersTable[i][1]:
+                return 1
+            if i == len(UsersTable)-1:
+                return 0
+           
+
+
+
   
 
 

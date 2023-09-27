@@ -26,7 +26,7 @@ def register():
 
 @IRSV2.route("/returnDB", methods=['GET', 'POST'])
 def returnDB():
-    rem = connectionDb.GetTable(sqlite3.connect('IRSV2.db'),'Users')
+    rem = connection.GetTable('Users')
     return rem
 
 @IRSV2.route("/addDB", methods=['GET', 'POST'])
@@ -35,7 +35,7 @@ def addDB():
     username = request.form['Username']
     password = request.form['Password']
 
-    rem = connectionDb.AddUser(sqlite3.connect('IRSV2.db'),username,password)
+    rem = connection.AddUser(username,password)
     return home()
 
 @IRSV2.route("/removeDB", methods=['GET', 'POST'])
@@ -43,7 +43,7 @@ def removeDB():
     
     id = request.form['id']
 
-    rem = connectionDb.RemoveUser(sqlite3.connect('IRSV2.db'),id)
+    rem = connection.RemoveUser(id)
 
     return home()
 

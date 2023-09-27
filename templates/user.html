@@ -1,57 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Mi Formulario</title>
-    <style>
-        .divs {
-            width: 25%;
-            height: 100px;
-            padding: 10px;
-            float: left;
-        }
-        *{
-            color:white;
-            background-color: black;
-        }
-    </style>
-</head>
-<body>
-                <!--      RETURN DB SEC           -->
-    <div class="divs" style="background-color:#000000;">
-        <form action="/returnDB" method="POST">
-            <input type="submit" value="Recuperar la base de datos">
-        </form>
-    </div>
-                <!--      ADD DB SEC           -->
-    <div class="divs" style="background-color:#000000;">
-        <form action="/addDB" method="POST">
+    <head>
+        <link rel="shortcut icon" href="{{url_for('static',filename='img/favicon.ico')}}">  
+        <title>{{user}}</title>
+    </head>
+    <body>
+        <h1>{{user}} profile</h1>
 
-            <label>Username</label>
-            <input type="text" name="Username"><br>
-
-            <label>Password</label>
-            <input type="text" name="Password"><br>
-
-            <input type="submit" value="Añadir usuario">
-        </form>
-    </div>
-                <!--      DELETE DB RECORD SEC         -->
-
-    <div class="divs" style="background-color:#000000;">
-
-        
-            <form action="/removeDB" method="POST">
-                <input type="number" name = "id">
-                <input type="submit" value="Eliminar usuario">
-            </form>
-
-
-    </div>
-
-    <div class="divs" style="background-color:#000000;">
-
-    </div>
-    
-
-</body>
-</html>
+    </body>

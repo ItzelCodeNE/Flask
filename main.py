@@ -11,7 +11,7 @@ def root():
     return render_template('root.html',NameDisplay=inspect.currentframe().f_code.co_name)
 
 @IRSV2.route("/home")
-def home():
+def home():             
     return render_template('home.html',NameDisplay=inspect.currentframe().f_code.co_name)
 
 @IRSV2.route("/login", methods=['GET', 'POST'])
@@ -44,10 +44,11 @@ def removeDB():
     id = request.form['id']
 
     rem = connection.RemoveUser(id)
-
     return home()
 
-
+@IRSV2.route('/<string:User>')
+def User(User):
+    return render_template('user.html',user=User)
 
 
 if __name__ == "__main__":

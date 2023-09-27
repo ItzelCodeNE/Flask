@@ -4,42 +4,32 @@ import sqlite3,hashlib
 
 class connectionDb:
 
-    
-    connection = sqlite3.connect('IRSv2.db')
+    def __init__(self, connection):
+        self.connection = connection
 
-    def GetTable(connection,table):    
-        ReturnTable = connection.cursor()
+
+
+    def GetTable(self,table):    
+        ReturnTable = self.connection.cursor()
         SQL = '''SELECT * FROM {0}'''
         ReturnTable.execute(SQL.format(table))
         Table = ReturnTable.fetchall()
         return Table
     
-    def AddUser(connection,Username,password):
-        InsertUser = connection.cursor()
+    def AddUser(self,Username,password):
+        InsertUser = self.connection.cursor()
         SQL = '''INSERT INTO Users (Username,Password) VALUES ('{0}','{1}')'''
         InsertUser.execute(SQL.format(Username,password))
-        connection.commit()
+        self.connection.commit()
     
-    def RemoveUser(connection,ID):
-        Remove = connection.cursor()
+    def RemoveUser(self,ID):
+        Remove = self.connection.cursor()
         SQL = '''DELETE FROM Users WHERE id = {0}'''
         Remove.execute(SQL.format(ID))
-        connection.commit()
+        self.connection.commit()
 
-    def Login(connection,Username,password):
-        ver = connection.cursor()
-        SQL = ''' SELECT * FROM Users WHERE Username = '{0}' '''
-        ver.execute(SQL.format(Username))
-        Table = ver.fetchall()
-        print(Table)
-
-        if password == Table[0][2]:
-            print('Login granted')
-        else:
-            print('Wrong password')
-
-    def FindUser(connection,Username):
-        find = connection.cursor()
+    def FindUser(self,Username):
+        find = self.connection.cursor()
         SQL = '''SELECT * FROM Users'''
         find.execute(SQL)
         UsersTable = find.fetchall()
@@ -48,6 +38,26 @@ class connectionDb:
                 return 1
             if i == len(UsersTable)-1:
                 return 0
+            
+    def Login(self,Username,password):
+        ver = self.connection.cursor()
+        SQL = ''' SELECT * FROM Users WHERE Username = '{0}' '''
+        ver.execute(SQL.format(Username))
+        Table = ver.fetchall()
+        
+        if self.FindUser(Username):
+            if password == Table[0][2]:
+                print('Login granted')
+            else:
+                print('Wrong password')
+        else: print('User not found')
+    
+
+    
+
+
+
+            
            
 
 

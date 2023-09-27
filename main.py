@@ -1,10 +1,10 @@
 from flask import Flask,render_template,request
-from db import connectionDb as DB
+from db import connectionDb
 import inspect,sqlite3
 
 
 IRSV2 = Flask(__name__)
-
+connection = connectionDb(sqlite3.connect('IRSv2.db'))
 
 @IRSV2.route("/")
 def root():
@@ -26,7 +26,7 @@ def register():
 
 @IRSV2.route("/returnDB", methods=['GET', 'POST'])
 def returnDB():
-    rem = DB.GetTable(sqlite3.connect('IRSV2.db'),'Users')
+    rem = connectionDb.GetTable(sqlite3.connect('IRSV2.db'),'Users')
     return rem
 
 @IRSV2.route("/addDB", methods=['GET', 'POST'])
@@ -35,7 +35,7 @@ def addDB():
     username = request.form['Username']
     password = request.form['Password']
 
-    rem = DB.AddUser(sqlite3.connect('IRSV2.db'),username,password)
+    rem = connectionDb.AddUser(sqlite3.connect('IRSV2.db'),username,password)
     return home()
 
 @IRSV2.route("/removeDB", methods=['GET', 'POST'])
@@ -43,7 +43,7 @@ def removeDB():
     
     id = request.form['id']
 
-    rem = DB.RemoveUser(sqlite3.connect('IRSV2.db'),id)
+    rem = connectionDb.RemoveUser(sqlite3.connect('IRSV2.db'),id)
 
     return home()
 

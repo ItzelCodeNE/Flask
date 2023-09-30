@@ -1,10 +1,12 @@
 from flask import Flask,render_template,request
 from flask_sqlalchemy import SQLAlchemy
-import inspect,sqlite3,os,threading
+import inspect
+
+
+
+
 
 IRSV2 = Flask(__name__)
-
-
 
 @IRSV2.route("/")
 def root():
@@ -22,6 +24,7 @@ def login():
 @IRSV2.route("/register", methods=['GET', 'POST'])
 def register():
 
+    
     return render_template('register.html',NameDisplay=inspect.currentframe().f_code.co_name)
 
 @IRSV2.route("/returnDB", methods=['GET', 'POST'])
@@ -35,9 +38,9 @@ def addDB():
 
     username = request.form['Username']
     password = request.form['Password']
+    email = request.form['Email']
         
-
-    
+        
     return register()
 
 @IRSV2.route("/removeDB", methods=['GET', 'POST'])
@@ -48,7 +51,7 @@ def removeDB():
     return home()
 
 @IRSV2.route('/<string:User>')
-def User(User):
+def remove(User):
     return render_template('user.html',user=User)
 
 

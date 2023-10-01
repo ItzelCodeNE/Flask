@@ -15,12 +15,18 @@ class User(Base):
     email:Mapped[str]
     comment:Mapped[List["Comment"]] = relationship(back_populates='user')
 
+    def __repr__(self) -> str:
+        return f"<User username={self.Username}"
+
 
 class Comment(Base):
     __tablename__ = 'Comments'
     id:Mapped[int] = mapped_column(primary_key=True)
     user_id:Mapped[int] = mapped_column(ForeignKey(User.id))
     text:Mapped[str] = mapped_column(text,nullable=False)
-    user:Mapped["User"] =relationship(back_populates=false)
+    user:Mapped["User"] =relationship(back_populates=False)
+
+    def __repr__(self) -> str:
+        return f"<Comment={self.text} by {self.user.Username}"
 
 
